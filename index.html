@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cohost FFXIV Adventurer Plate Generator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="script.js"></script>
+  </head>
+  <body onload="generateCSS()" on>
+    <div class="pagehead">
+    <h1>Cohost FFXIV Adventurer Plate Generator</h1>
+    By <a href="https://cohost.org/zenithstar95" target="_blank">Sebastian.</a> Class/Job icons from <a href="https://github.com/xivapi/classjob-icons" target="_blank">here.</a> Rank icons from <a href="https://ffxiv.gamerescape.com/wiki/Grand_Company_Ranks" target="_blank">here.</a>
+    </div>
+    
+    <div class="pagemain">
+      <!--ADVENTURER PLATE PREVIEW-->
+      <div id="plate-container">
+        <div id="adv-plate-bg" style="background-image: linear-gradient(#f7f7f7, #ffffff);">
+          <div id="plate-head" style="background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.25))">
+            <div id="name-title">
+              <span id="plate-title"></span>
+              <br>
+              <span id="plate-name"></span>
+            </div>
+            <div id="world-dc">
+              <span id="plate-world"></span> [<span id="plate-dc"></span>]
+            </div>
+          </div>
+          <div id="plate-info">
+            <div id="plate-job-level">
+              <img id="plate-job-icon" height="55" src="">
+              LEVEL <span id="plate-level"></span>
+              <br>
+              <span id="plate-job-name"></span>
+            </div>
+            <br>
+            <div id="grand-company">
+              <img id="plate-rank-icon" width="40" src="">
+              <span id="plate-rank"></span>
+            </div>
+            <br>
+            <div id="character-info">
+            </div>
+          </div>
+          <img id="plate-image" src="">
+        </div>
+      </div>
+      
+      <!--CUSTOMISATION FORM-->
+      <form method="post">
+        <!--COLUMN 1-->
+        <div class="formcolumn">
+          <!--CHARACTER INFO-->
+          <fieldset>
+            <legend>Character Info</legend>
+            <!--TITLE-->
+            <div class="inputbox">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" oninput="updateTitle(this.value)" value="Warrior of Light">
+            </div>
+            <!--TITLE COLOR-->
+            <div class="inputbox">
+              <label for="title-color">Title Color</label>
+              <input type="color" name="title-color" id="title-color" oninput="updateTitleColor(this.value)" value="#a2f5ea">
+            </div>
+            <!--NAME-->
+            <div class="inputbox">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" oninput="updateName(this.value)" value="Meteor Survivor">
+            </div>
+            <!--NAME COLOR-->
+            <div class="inputbox">
+              <label for="name-color">Name Color</label>
+              <input type="color" name="name-color" id="name-color" oninput="updateNameColor(this.value)" value="#FFFFFF">
+            </div>
+          </fieldset>
+          <!--SERVER INFO-->
+          <fieldset>
+            <legend>Server Info</legend>
+            <!--WORLD-->
+            <div class="inputbox">
+              <label for="world">World</label>
+              <input type="text" name="world" id="world" oninput="updateWorld(this.value)" value="Eorzea">
+            </div>
+            <!--DATA CENTER-->
+            <div class="inputbox">
+              <label for="dc">Data Center</label>
+              <input type="text" name="dc" id="dc" oninput="updateDC(this.value)" value="Etheirys">
+            </div>
+            <div class="inputbox">
+              <label for="server-color">Server Info Color</label>
+              <input type="color" name="server-color" id="server-color" oninput="updateServerColor(this.value)" value="#FFFFFF">
+            </div>
+            <div class="inputbox">
+              <label for="server-glow">Server Info Glow</label>
+              <input type="color" name="server-glow" id="server-glow" oninput="updateServerGlow(this.value)" value="#DB900C">
+            </div>
+          </fieldset>
+          <!--CLASS/JOB INFO-->
+          <fieldset>
+            <legend>Class/Job Info</legend>
+            <!--CLASS/JOB-->
+            <div class="inputbox">
+              <label for="classjob">Class/Job</label>
+              <select name="classjob" id="classjob" onchange="updateClassJob(this.value)">
+                <!--TANK-->
+                <optgroup label="Tank">
+                  <option value="gladiator">Gladiator</option>
+                  <option value="paladin" selected>Paladin</option>
+                  <option value="marauder">Marauder</option>
+                  <option value="warrior">Warrior</option>
+                  <option value="darkknight">Dark Knight</option>  
+                  <option value="gunbreaker">Gunbreaker</option>
+                </optgroup>
+                <!--HEALER-->
+                <optgroup label="Healer">
+                  <option value="conjurer">Conjurer</option>
+                  <option value="whitemage">White Mage</option>
+                  <option value="scholar">Scholar</option>
+                  <option value="astrologian">Astrologian</option>
+                  <option value="sage">Sage</option>
+                </optgroup>
+                <!--MELEE DPS-->
+                <optgroup label="Melee DPS">
+                  <option value="pugilist">Pugilist</option>
+                  <option value="monk">Monk</option>
+                  <option value="lancer">Lancer</option>
+                  <option value="dragoon">Dragoon</option>
+                  <option value="rogue">Rogue</option>
+                  <option value="ninja">Ninja</option>
+                  <option value="samurai">Samurai</option>
+                  <option value="reaper">Reaper</option>
+                </optgroup>
+                <!--PHYSICAL RANGED DPS-->
+                <optgroup label="Physical Ranged DPS">
+                  <option value="archer">Archer</option>
+                  <option value="bard">Bard</option>
+                  <option value="machinist">Machinist</option>
+                  <option value="dancer">Dancer</option>
+                </optgroup>
+                <!--MAGICAL RANGED DPS-->
+                <optgroup label="Magical Ranged DPS">
+                  <option value="thaumaturge">Thaumaturge</option>
+                  <option value="blackmage">Black Mage</option>
+                  <option value="arcanist">Arcanist</option>
+                  <option value="summoner">Summoner</option>
+                  <option value="redmage">Red Mage</option>
+                  <option value="bluemage">Blue Mage</option>
+                </optgroup>
+                <!--CRAFTER-->
+                <optgroup label="Disciple of the Hand">
+                  <option value="carpenter">Carpenter</option>
+                  <option value="blacksmith">Blacksmith</option>
+                  <option value="armorer">Armorer</option>
+                  <option value="goldsmith">Goldsmith</option>
+                  <option value="leatherworker">Leatherworker</option>
+                  <option value="weaver">Weaver</option>
+                  <option value="alchemist">Alchemist</option>
+                  <option value="culinarian">Culinarian</option>
+                </optgroup>
+                <!--GATHERER-->
+                <optgroup label="Disciple of the Land">
+                  <option value="miner">Miner</option>
+                  <option value="botanist">Botanist</option>
+                  <option value="fisher">Fisher</option>
+                </optgroup>
+              </select>
+            </div>
+            <!--LEVEL-->
+            <div class="inputbox">
+              <label for="level">Level</label>
+              <input type="number" name="level" id="level" value="90" oninput="updateLevel(this.value)">
+            </div>
+            <!--CLASS/JOB COLOR-->
+            <div class="inputbox">
+              <label for="class-job-color">Class/Job Color</label>
+              <input type="color" name="class-job-color" id="class-job-color" oninput="updateClassJobColor(this.value)" value="#000000">
+            </div>
+          </fieldset>
+        </div>
+        <!--COLUMN 2-->
+        <div class="formcolumn">
+          <!--GRAND COMPANY-->
+          <fieldset>
+            <legend>Grand Company</legend>
+            <!--RANK-->
+            <div class="inputbox">
+              <label for="gc">Rank</label>
+              <select name="gc" id="gc" onchange="updateGC(this.value)">
+                <option value="none">None</option>
+                <!--THE MAELSTROM-->
+                <optgroup label="The Maelstrom">
+                  <option value="stormprivatethirdclass">Storm Private Third Class</option>
+                  <option value="stormprivatesecondclass">Storm Private Second Class</option>
+                  <option value="stormprivatefirstclass">Storm Private First Class</option>
+                  <option value="stormcorporal">Storm Corporal</option>
+                  <option value="stormsergeantthirdclass">Storm Sergeant Third Class</option>
+                  <option value="stormsergeantsecondclass">Storm Sergeant Second Class</option>
+                  <option value="stormsergeantfirstclass">Storm Sergeant First Class</option>
+                  <option value="chiefstormsergeant">Chief Storm Sergeant</option>
+                  <option value="secondstormlieutenant">Second Storm Lieutenant</option>
+                  <option value="firststormlieutenant">First Storm Lieutenant</option>
+                  <option value="stormcaptain" selected>Storm Captain</option>
+                </optgroup>
+                <!--THE ORDER OF THE TWIN ADDER-->
+                <optgroup label="The Order of the Twin Adder">
+                  <option value="serpentprivatethirdclass">Serpent Private Third Class</option>
+                  <option value="serpentprivatesecondclass">Serpent Private Second Class</option>
+                  <option value="serpentprivatefirstclass">Serpent Private First Class</option>
+                  <option value="serpentcorporal">Serpent Corporal</option>
+                  <option value="serpentsergeantthirdclass">Serpent Sergeant Third Class</option>
+                  <option value="serpentsergeantsecondclass">Serpent Sergeant Second Class</option>
+                  <option value="serpentsergeantfirstclass">Serpent Sergeant First Class</option>
+                  <option value="chiefserpentsergeant">Chief Serpent Sergeant</option>
+                  <option value="secondserpentlieutenant">Second Serpent Lieutenant</option>
+                  <option value="firstserpentlieutenant">First Serpent Lieutenant</option>
+                  <option value="serpentcaptain">Serpent Captain</option>
+                </optgroup>
+                <!--THE IMMORTAL FLAMES-->
+                <optgroup label="The Immortal Flames">
+                  <option value="flameprivatethirdclass">Flame Private Third Class</option>
+                  <option value="flameprivatesecondclass">Flame Private Second Class</option>
+                  <option value="flameprivatefirstclass">Flame Private First Class</option>
+                  <option value="flamecorporal">Flame Corporal</option>
+                  <option value="flamesergeantthirdclass">Flame Sergeant Third Class</option>
+                  <option value="flamesergeantsecondclass">Flame Sergeant Second Class</option>
+                  <option value="flamesergeantfirstclass">Flame Sergeant First Class</option>
+                  <option value="chiefflamesergeant">Chief Flame Sergeant</option>
+                  <option value="secondflamelieutenant">Second Flame Lieutenant</option>
+                  <option value="firstflamelieutenant">First Flame Lieutenant</option>
+                  <option value="flamecaptain">Flame Captain</option>
+                </optgroup>
+              </select>
+            </div>
+            <!--GRAND COMPANY COLOR-->
+            <div class="inputbox">
+              <label for="gc-color">Grand Company Color</label>
+              <input type="color" name="gc-color" id="gc-color" oninput="updateGCColor(this.value)" value="#000000">
+            </div>
+          </fieldset>
+          <!--ADVENTURER PLATE TEXT-->
+          <fieldset>
+            <legend>Adventurer Plate Text</legend>
+            <!--CHARACTER INFO-->
+            <div class="inputbox">
+              <label for="char-info">Character Info</label>
+              <textarea name="char-info" id="char-info" oninput="updateText(this.value)">For those we have lost. For those we can yet save.</textarea>
+            </div>
+            <!--CHARACTER INFO COLOR-->
+            <div class="inputbox">
+              <label for="char-info-color">Character Info Color</label>
+              <input type="color" name="char-info-color" id="char-info-color" oninput="updateTextColor(this.value)" value="#000000">
+            </div>
+          </fieldset>
+          <!--PLATE CUSTOMISATION-->
+          <fieldset>
+            <legend>Plate Customisation</legend>
+            <!--HEADING COLOR-->
+            <div class="inputbox">
+              <label for="heading-color">Heading Color</label>
+              <input type="color" name="heading-color" id="heading-color" oninput="updateHeadingColor(this.value)" value="#000000">
+            </div>
+            <!--BACKGROUND COLOR (TOP)-->
+            <div class="inputbox">
+              <label for="plate-top-color">Plate Background (Top)</label>
+              <input type="color" name="plate-top-color" id="plate-top-color" oninput="updatePlateTopColor(this.value)" value="#7f7f7f">
+            </div>
+            <!--BACKGROUND COLOR (BOTTOM)-->
+            <div class="inputbox">
+              <label for="plate-btm-color">Plate Background (Bottom)</label>
+              <input type="color" name="plate-btm-color" id="plate-btm-color" oninput="updatePlateBottomColor(this.value)" value="#FFFFFF">
+            </div>
+            <!--PORTRAIT-->
+            <div class="inputbox">
+              <label for="portrait">Portrait (250x350)</label>
+              <input type="url" name="portrait" id="portrait" oninput="updatePortrait(this.value)" value="https://zenithstar95.neocities.org/adventurer-plate/meteor.png">
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Generate CSS</legend>
+            <!--GENERATE CSS-->
+            <div class="inputbox">
+              <input type="button" value="Generate CSS" style="float: none" onclick="generateCSS()">
+            </div>
+          </fieldset>
+        </div>
+      </form>
+      <br>
+      <textarea id="css" style="float: none; width: 100%; margin: 20px; height: 200px"></textarea>
+    </div>
+  </body>
+</html>
