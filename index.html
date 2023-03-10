@@ -29,14 +29,14 @@
           </div>
           <div id="plate-info">
             <div id="plate-job-level">
-              <img id="plate-job-icon" height="55" src="">
+              <img id="plate-job-icon" height="55" src="" alt="A job icon.">
               LEVEL <span id="plate-level"></span>
               <br>
               <span id="plate-job-name"></span>
             </div>
             <br>
             <div id="grand-company">
-              <img id="plate-rank-icon" width="40" src="">
+              <img id="plate-rank-icon" width="40" src="" alt="A Grand Company rank insignia.">
               <span id="plate-rank"></span>
             </div>
             <br>
@@ -275,6 +275,11 @@
             <div class="inputbox">
               <label for="portrait">Portrait (250x350)</label>
               <input type="url" name="portrait" id="portrait" oninput="updatePortrait(this.value)" value="https://zenithstar95.neocities.org/adventurer-plate/meteor.png">
+            </div>
+            <!--ALT TEXT-->
+            <div class="inputbox">
+              <label for="alt-text">Alt Text</label>
+              <input type="text" name="alt-text" id="alt-text" oninput="updateAltText(this.value)" value="The Warrior of Light, raising his shield against a backdrop of flame.">
             </div>
           </fieldset>
           <fieldset>

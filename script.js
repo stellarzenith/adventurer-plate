@@ -18,6 +18,7 @@
     var topcolor = updatePlateTopColor(document.getElementById("plate-top-color").value);
     var bottomcolor = updatePlateBottomColor(document.getElementById("plate-btm-color").value);
     var portrait = updatePortrait(document.getElementById("portrait").value);
+    var alttext = updateAltText(document.getElementById("alt-text").value);
     
     var css = "<div style='padding: 10px;width:100%;overflow: auto;'><div style='background-image: linear-gradient(rgb("+topcolor+"), rgb("+bottomcolor+")); width: 600px; min-height: 350px; border-radius: 0.5em; filter: drop-shadow(0px 0px 5px);'><div style='background-image: linear-gradient(to right, rgb("+headingcolor+"), rgba("+headingcolor+", 0.25)); display: inline-block; padding: 5px; width: 100%; height: 55px; border-radius: 0.5em;'><div style='float: left; margin-left: 10px; line-height: 1.25; filter: drop-shadow(0px 0.5px 1px);'><span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span><br><span style='color: rgb("+namecolor+"); font-size: 14px;'>"+name+"</span></div><div style='font-size: 14px; margin-right: 30px; float: right; color: rgb("+servercolor+"); filter: "+serverglow+";'>"+world+" ["+dc+"]</div></div><div style='margin-left: 15px; width: 295px; height: 280px; overflow: auto;'><div style='line-height: 1.3; color: rgb("+classjobcolor+")'><img src='https://zenithstar95.neocities.org/adventurer-plate/classjob/"+classjob+".png' style='margin: 0px; filter: drop-shadow(0px 0px 1px #000000); float: left;' width='55'><span style='font-family: \"Verdana\", sans-serif;'>LEVEL "+level+"</span><br><span style='font-family: \"Georgia\", serif; font-size: 20px;'>"+classjob.toUpperCase()+"</span></div><br>";
     
@@ -25,7 +26,7 @@
       css += "<div style='color: rgb("+gccolor+")'><img src='https://zenithstar95.neocities.org/adventurer-plate/ranks/"+gc[0]+".png' style='margin: 0px 10px 10px; width: 35px; float: left;'><span>"+gc[1]+"</span></div><br>";
     }
     
-    css += "<div style='color: rgb("+textcolor+")'>"+text+"</div></div><img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"'></div></div></div>";
+    css += "<div style='color: rgb("+textcolor+")'>"+text+"</div></div><img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"' alt='"+formatText(alttext)+"'></div></div></div>";
     
     document.getElementById("css").value = css;
   }
@@ -172,6 +173,17 @@
   function updatePortrait(portrait){
    document.getElementById("plate-image").src = portrait;
    return portrait;
+  }
+
+  function updateAltText(alttext){
+    document.getElementById("plate-image").alt = alttext;
+    return alttext;
+  }
+
+  function formatText(text){
+    text = text.replaceAll("'", "&#39;");
+    text = text.replaceAll('"', "&#34;");
+    return text;
   }
   
   function convertRGB(color){
