@@ -6,6 +6,7 @@
     <title>Cohost FFXIV Adventurer Plate Generator</title>
     <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <script src="script.js"></script>
+    <script src="saveload.js"></script>
   </head>
   <body onload="generateCSS()">
     <div class="pagehead">
@@ -53,6 +54,20 @@
       <form method="post">
         <!--COLUMN 1-->
         <div class="formcolumn">
+          <!--IMPORT/EXPORT PLATE-->
+          <fieldset>
+            <legend>Import/Export Plate</legend>
+            <!--IMPORT PLATE-->
+            <div class="inputbox">
+              <label for="importplate">Import</label>
+              <input type="file" name="importplate" id="importplate" oninput="importPlate(this.files)" accept=".json">
+            </div>
+            <!--EXPORT PLATE-->
+            <div class="inputbox">
+              <label for="exportplate">Export</label>
+              <input type="button" name="exportplate" id="exportplate" onclick="exportPlate()" value="Export">
+            </div>
+          </fieldset>
           <!--CHARACTER INFO-->
           <fieldset>
             <legend>Character Info</legend>
