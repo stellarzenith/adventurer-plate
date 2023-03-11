@@ -26,7 +26,7 @@
       css += "\n\t\t\t<div style='color: rgb("+gccolor+")'>\n\t\t\t\t<img src='https://zenithstar95.neocities.org/adventurer-plate/ranks/"+gc[0]+".png' style='margin: 0px 10px 10px; width: 35px; float: left;'>\n\t\t\t\t<span>"+gc[1]+"</span>\n\t\t\t</div>\n\t\t\t<br>";
     }
     
-    css += "\n\t\t\t<div style='color: rgb("+textcolor+")'>\n\t\t\t\t"+text+"\n\t\t\t</div>\n\t\t</div>\n\t\t<img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"' alt='"+formatText(alttext)+"'>\n\t\t</div>\n\t</div>\n</div>";
+    css += "\n\t\t\t<div style='color: rgb("+textcolor+")'>\n\t\t\t\t"+text+"\n\t\t\t</div>\n\t\t</div>\n\t\t<img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"' alt='"+formatText(alttext)+"'>\n\t</div>\n</div>";
     
     document.getElementById("css").value = css;
   }
