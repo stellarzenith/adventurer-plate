@@ -1,32 +1,32 @@
   function generateCSS(){
     var title = updateTitle(document.getElementById("title").value);
-    var titlecolor = updateTitleColor(document.getElementById("title-color").value);
+    var titlecolor = updateTitleColor(document.getElementById("titlecolor").value);
     var name = updateName(document.getElementById("name").value);
-    var namecolor = updateNameColor(document.getElementById("name-color").value);
+    var namecolor = updateNameColor(document.getElementById("namecolor").value);
     var world = updateWorld(document.getElementById("world").value);
     var dc = updateDC(document.getElementById("dc").value);
-    var servercolor = updateServerColor(document.getElementById("server-color").value);
-    var serverglow = updateServerGlow(document.getElementById("server-glow").value);
+    var servercolor = updateServerColor(document.getElementById("servercolor").value);
+    var serverglow = updateServerGlow(document.getElementById("serverglow").value);
     var classjob = updateClassJob(document.getElementById("classjob").value);
-    var classjobcolor = updateClassJobColor(document.getElementById("class-job-color").value);
+    var classjobcolor = updateClassJobColor(document.getElementById("classjobcolor").value);
     var level = updateLevel(document.getElementById("level").value);
     var gc = updateGC(document.getElementById("gc").value);
-    var gccolor = updateGCColor(document.getElementById("gc-color").value);
-    var text = updateText(document.getElementById("char-info").value);
-    var textcolor = updateTextColor(document.getElementById("char-info-color").value);
-    var headingcolor = updateHeadingColor(document.getElementById("heading-color").value);
-    var topcolor = updatePlateTopColor(document.getElementById("plate-top-color").value);
-    var bottomcolor = updatePlateBottomColor(document.getElementById("plate-btm-color").value);
+    var gccolor = updateGCColor(document.getElementById("gccolor").value);
+    var text = updateText(document.getElementById("charinfo").value);
+    var textcolor = updateTextColor(document.getElementById("charinfocolor").value);
+    var headingcolor = updateHeadingColor(document.getElementById("headingcolor").value);
+    var topcolor = updatePlateTopColor(document.getElementById("platetopcolor").value);
+    var bottomcolor = updatePlateBottomColor(document.getElementById("platebtmcolor").value);
     var portrait = updatePortrait(document.getElementById("portrait").value);
-    var alttext = updateAltText(document.getElementById("alt-text").value);
-    
-    var css = "<div style='padding: 10px;width:100%;overflow: auto;'><div style='margin: auto; background-image: linear-gradient(rgb("+topcolor+"), rgb("+bottomcolor+")); width: 600px; min-height: 350px; border-radius: 0.5em; filter: drop-shadow(0px 0px 5px #000000);'><div style='background-image: linear-gradient(to right, rgb("+headingcolor+"), rgba("+headingcolor+", 0.25)); display: inline-block; padding: 5px; width: 100%; height: 55px; border-radius: 0.5em;'><div style='float: left; margin-left: 10px; line-height: 1.25; filter: drop-shadow(0px 0.5px 1px);'><span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span><br><span style='color: rgb("+namecolor+"); font-size: 14px;'>"+name+"</span></div><div style='font-size: 14px; margin-right: 30px; float: right; color: rgb("+servercolor+"); filter: "+serverglow+";'>"+world+" ["+dc+"]</div></div><div style='margin-left: 15px; width: 295px; height: 280px; overflow: auto;'><div style='line-height: 1.3; color: rgb("+classjobcolor+")'><img src='https://zenithstar95.neocities.org/adventurer-plate/classjob/"+classjob+".png' style='margin: 0px; filter: drop-shadow(0px 0px 1px #000000); float: left;' width='55'><span style='font-family: \"Verdana\", sans-serif;'>LEVEL "+level+"</span><br><span style='font-family: \"Georgia\", serif; font-size: 20px;'>"+classjob.toUpperCase()+"</span></div><br>";
+    var alttext = updateAltText(document.getElementById("alttext").value);
+
+    var css = "<div style='padding: 10px;width:100%;overflow: auto;'>\n\t<div style='margin: auto; background-image: linear-gradient(rgb("+topcolor+"), rgb("+bottomcolor+")); width: 600px; min-height: 350px; border-radius: 0.5em; filter: drop-shadow(0px 0px 5px #000000);'>\n\t\t<div style='background-image: linear-gradient(to right, rgb("+headingcolor+"), rgba("+headingcolor+", 0.25)); display: inline-block; padding: 5px; width: 100%; height: 55px; border-radius: 0.5em;'>\n\t\t\t<div style='float: left; margin-left: 10px; line-height: 1.25; filter: drop-shadow(0px 0.5px 1px);'>\n\t\t\t\t<span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span>\n\t\t\t\t<br>\n\t\t\t\t<span style='color: rgb("+namecolor+"); font-size: 14px;'>"+name+"</span>\n\t\t\t</div>\n\t\t\t<div style='font-size: 14px; margin-right: 30px; float: right; color: rgb("+servercolor+"); filter: "+serverglow+";'>\n\t\t\t\t"+world+" ["+dc+"]\n\t\t\t</div>\n\t\t</div>\n\t\t<div style='margin-left: 15px; width: 295px; height: 280px; overflow: auto;'>\n\t\t\t<div style='line-height: 1.3; color: rgb("+classjobcolor+")'>\n\t\t\t\t<img src='https://zenithstar95.neocities.org/adventurer-plate/classjob/"+classjob+".png' style='margin: 0px; filter: drop-shadow(0px 0px 1px #000000); float: left;' width='55'>\n\t\t\t\t<span style='font-family: \"Verdana\", sans-serif;'>LEVEL "+level+"</span>\n\t\t\t\t<br>\n\t\t\t\t<span style='font-family: \"Georgia\", serif; font-size: 20px;'>"+classjob.toUpperCase()+"</span>\n\t\t\t</div>\n\t\t\t<br>";
     
     if(gc.length > 0){
-      css += "<div style='color: rgb("+gccolor+")'><img src='https://zenithstar95.neocities.org/adventurer-plate/ranks/"+gc[0]+".png' style='margin: 0px 10px 10px; width: 35px; float: left;'><span>"+gc[1]+"</span></div><br>";
+      css += "\n\t\t\t<div style='color: rgb("+gccolor+")'>\n\t\t\t\t<img src='https://zenithstar95.neocities.org/adventurer-plate/ranks/"+gc[0]+".png' style='margin: 0px 10px 10px; width: 35px; float: left;'>\n\t\t\t\t<span>"+gc[1]+"</span>\n\t\t\t</div>\n\t\t\t<br>";
     }
     
-    css += "<div style='color: rgb("+textcolor+")'>"+text+"</div></div><img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"' alt='"+formatText(alttext)+"'></div></div></div>";
+    css += "\n\t\t\t<div style='color: rgb("+textcolor+")'>\n\t\t\t\t"+text+"\n\t\t\t</div>\n\t\t</div>\n\t\t<img style='height: 350px; width: 250px; position: absolute; top: 0px; right: 30px; z-index: -1; margin:0' src='"+portrait+"' alt='"+formatText(alttext)+"'>\n\t\t</div>\n\t</div>\n</div>";
     
     document.getElementById("css").value = css;
   }
