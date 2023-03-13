@@ -22,9 +22,11 @@
         <div id="adv-plate-bg" style="background-image: linear-gradient(#f7f7f7, #ffffff);">
           <div id="plate-head" style="background-image: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.25))">
             <div id="name-title">
-              <span id="plate-title"></span>
-              <br>
+              <span id="plate-title-above"></span>
+              <br id="break-above">
               <span id="plate-name"></span>
+              <br id="break-below" hidden>
+              <span id="plate-title-below" hidden></span>
             </div>
             <div id="world-dc">
               <span id="plate-world"></span> [<span id="plate-dc"></span>]
@@ -71,6 +73,15 @@
           <!--CHARACTER INFO-->
           <fieldset>
             <legend>Character Info</legend>
+            <!--TITLE POSITION-->
+            <div class="inputbox">
+              <label for="abovename">Title Above Name</label>
+              <input type="radio" name="titlepos" id="abovename" value="abovename" onchange="updateTitlePos(this.value)" checked><br>
+              <label for="belowname">Title Below Name</label>
+              <input type="radio" name="titlepos" id="belowname" value="belowname" onchange="updateTitlePos(this.value)"><br>
+              <label for="notitle">No Title</label>
+              <input type="radio" name="titlepos" id="notitle" value="notitle" onchange="updateTitlePos(this.value)">
+            </div>
             <!--TITLE-->
             <div class="inputbox">
               <label for="title">Title</label>

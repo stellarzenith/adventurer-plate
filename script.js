@@ -1,4 +1,5 @@
 function generateCSS(){
+	var titlepos = getSelectedTitlePos(document.getElementsByName("titlepos"));
 	var title = updateTitle(document.getElementById("title").value);
 	var titlecolor = updateTitleColor(document.getElementById("titlecolor").value);
 	var name = updateName(document.getElementById("name").value);
@@ -20,7 +21,11 @@ function generateCSS(){
 	var portrait = updatePortrait(document.getElementById("portrait").value);
 	var alttext = updateAltText(document.getElementById("alttext").value);
 
-	var css = "<div style='padding: 10px;width:100%;overflow: auto;'>\n\t<div style='margin: auto; background-image: linear-gradient(rgb("+topcolor+"), rgb("+bottomcolor+")); width: 600px; height: 350px; border-radius: 0.5em; filter: drop-shadow(0px 0px 5px #000000); position: relative;'>\n\t\t<div style='background-image: linear-gradient(to right, rgb("+headingcolor+"), rgba("+headingcolor+", 0.25)); display: inline-block; padding: 5px; width: 100%; height: 55px; border-radius: 0.5em;'>\n\t\t\t<div style='float: left; margin-left: 10px; line-height: 1.25; filter: drop-shadow(0px 0.5px 1px);'>\n\t\t\t\t<span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span>\n\t\t\t\t<br>\n\t\t\t\t<span style='color: rgb("+namecolor+"); font-size: 14px;'>"+name+"</span>\n\t\t\t</div>\n\t\t\t<div style='font-size: 14px; margin-right: 30px; float: right; color: rgb("+servercolor+"); filter: "+serverglow+";'>\n\t\t\t\t"+world+" ["+dc+"]\n\t\t\t</div>\n\t\t</div>\n\t\t<div style='margin-left: 15px; width: 295px; height: 280px; overflow: auto;'>\n\t\t\t<div style='line-height: 1.3; color: rgb("+classjobcolor+")'>\n\t\t\t\t<img src='https://zenithstar95.neocities.org/adventurer-plate/classjob/"+classjob+".png' style='margin: 0px; filter: drop-shadow(0px 0px 1px #000000); float: left;' width='55'>\n\t\t\t\t<span style='font-family: \"Verdana\", sans-serif;'>LEVEL "+level+"</span>\n\t\t\t\t<br>\n\t\t\t\t<span style='font-family: \"Georgia\", serif; font-size: 20px;'>"+classjob.toUpperCase()+"</span>\n\t\t\t</div>\n\t\t\t<br>";
+	var css = "<div style='padding: 10px;width:100%;overflow: auto;'>\n\t<div style='margin: auto; background-image: linear-gradient(rgb("+topcolor+"), rgb("+bottomcolor+")); width: 600px; height: 350px; border-radius: 0.5em; filter: drop-shadow(0px 0px 5px #000000); position: relative;'>\n\t\t<div style='background-image: linear-gradient(to right, rgb("+headingcolor+"), rgba("+headingcolor+", 0.25)); display: inline-block; padding: 5px; width: 100%; height: 55px; border-radius: 0.5em;'>\n\t\t\t";
+	
+	css += formatNameTitle(titlepos, title, titlecolor, name, namecolor);
+	
+	css += "<div style='font-size: 14px; margin-right: 30px; float: right; color: rgb("+servercolor+"); filter: "+serverglow+";'>\n\t\t\t\t"+world+" ["+dc+"]\n\t\t\t</div>\n\t\t</div>\n\t\t<div style='margin-left: 15px; width: 295px; height: 280px; overflow: auto;'>\n\t\t\t<div style='line-height: 1.3; color: rgb("+classjobcolor+")'>\n\t\t\t\t<img src='https://zenithstar95.neocities.org/adventurer-plate/classjob/"+classjob+".png' style='margin: 0px; filter: drop-shadow(0px 0px 1px #000000); float: left;' width='55'>\n\t\t\t\t<span style='font-family: \"Verdana\", sans-serif;'>LEVEL "+level+"</span>\n\t\t\t\t<br>\n\t\t\t\t<span style='font-family: \"Georgia\", serif; font-size: 20px;'>"+classjob.toUpperCase()+"</span>\n\t\t\t</div>\n\t\t\t<br>";
 	
 	//Is there a Grand Company selected?
 	if(gc.length > 0){
@@ -32,13 +37,69 @@ function generateCSS(){
 	document.getElementById("css").value = css;
 }
 
+function getSelectedTitlePos(titlepos){
+	if(titlepos[0].checked){
+		return "abovename";
+	}
+	else if(titlepos[1].checked){
+		return "belowname";
+	}
+	else{
+		return "notitle";
+	}
+}
+
+function formatNameTitle(titlepos, title, titlecolor, name, namecolor){
+	var css = "<div style='float: left; margin-left: 10px;";
+	// set line height if there is a title
+	if(titlepos != "notitle"){
+		css += " line-height: 1.25;";
+	}
+	css += " filter: drop-shadow(0px 0.5px 1px);'>\n\t\t\t\t";
+	// add title above name
+	if(titlepos == "abovename"){
+		css += "<span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span>\n\t\t\t\t<br>\n\t\t\t\t";
+	}
+	// add name
+	css += "<span style='color: rgb("+namecolor+"); font-size: 14px;'>"+name+"</span>\n\t\t\t";
+	// add title below name
+	if(titlepos == "belowname"){
+		css += "\t<br>\n\t\t\t\t<span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span>\n\t\t\t";
+	}
+	css += "</div>\n\t\t\t";
+	return css;
+}
+
+function updateTitlePos(position){
+	document.getElementById("plate-title-above").hidden = true;
+	document.getElementById("break-above").hidden = true;
+	document.getElementById("plate-title-below").hidden = true;
+	document.getElementById("break-below").hidden = true;
+
+	switch(position){
+		case "abovename":
+			document.getElementById("plate-title-above").hidden = false;
+			document.getElementById("break-above").hidden = false;
+			break;
+		case "belowname":
+			document.getElementById("plate-title-below").hidden = false;
+			document.getElementById("break-below").hidden = false;
+			break;
+		default:
+			break;
+	}
+	return position;
+}
+
 function updateTitle(title){
-	document.getElementById("plate-title").innerHTML = title;
+	document.getElementById("plate-title-above").innerHTML = title;
+	document.getElementById("plate-title-below").innerHTML = title;
 	return title;
 }
 
 function updateTitleColor(color){
-	document.getElementById("plate-title").style.color = color; 
+	document.getElementById("plate-title-above").style.color = color;
+	document.getElementById("plate-title-below").style.color = color; 
 	return convertRGB(color);
 }
 

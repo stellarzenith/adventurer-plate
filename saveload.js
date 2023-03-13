@@ -1,5 +1,6 @@
 function exportPlate(){
 	const adventurerplate = {
+		titlepos: getSelectedTitlePos(document.getElementsByName("titlepos")),
 		title: document.getElementById("title").value,
 		titlecolor: document.getElementById("titlecolor").value,
 		name: document.getElementById("name").value,
@@ -20,7 +21,7 @@ function exportPlate(){
 		platebtmcolor: document.getElementById("platebtmcolor").value,
 		portrait: document.getElementById("portrait").value,
 		alttext: document.getElementById("alttext").value 
-	}
+	};
 	
 	//Convert information to a JSON file and download
 	var a = document.createElement("a");
@@ -41,9 +42,19 @@ function importPlate(files){
 	fr.onload = function(){
 		const adventurerplate = JSON.parse(fr.result);
 		//Populate the form
-		for(key in adventurerplate){
-			document.getElementById(key).value = adventurerplate[key];
+		for(var key in adventurerplate){
+			if(key == "titlepos"){
+				importTitlePos(adventurerplate[key]);
+			}
+			else{
+				document.getElementById(key).value = adventurerplate[key];
+			}
 		}
 		generateCSS();
-	}
+	};
+}
+
+function importTitlePos(titlepos){
+	document.getElementById(titlepos).checked = true;
+	updateTitlePos(titlepos);
 }
