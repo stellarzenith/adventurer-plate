@@ -55,7 +55,7 @@ function formatNameTitle(titlepos, title, titlecolor, name, namecolor){
 	if(titlepos != "notitle"){
 		css += " line-height: 1.25;";
 	}
-	css += " filter: drop-shadow(0px 0.5px 1px);'>\n\t\t\t\t";
+	css += " filter: drop-shadow(0px 0.5px 1px #000);'>\n\t\t\t\t";
 	// add title above name
 	if(titlepos == "abovename"){
 		css += "<span style='color: rgb("+titlecolor+"); font-size: 13px;'>"+title+"</span>\n\t\t\t\t<br>\n\t\t\t\t";
